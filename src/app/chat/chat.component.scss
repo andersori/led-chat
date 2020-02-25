@@ -1,0 +1,20 @@
+.chat {
+    width: inherit;
+    height: inherit;
+}
+  
+.full-width {
+    min-width: 150px;
+    width: 92%;
+}
+
+.btn-send {
+    margin: 10px;
+    float: right;
+}
+
+.input-msg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
