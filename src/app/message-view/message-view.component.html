@@ -1,0 +1,26 @@
+<ng-template #noMessages>
+    <div class="no-messages">
+        <span class="title">No new message?</span>
+        <span class="info">Send your first message below.</span>
+    </div>
+</ng-template>
+<div class="main">
+    <cdk-virtual-scroll-viewport itemSize="50"
+        *ngIf="chat.messagesLed && chat.messagesLed[0]; else noMessages"
+        #scrollMe
+        class="messages-container" class="viewport">
+        <ul>
+            <li *cdkVirtualFor="let message of chat.getMessages(this.viewport)" [style.flex-direction]="
+            message.isBot === false
+              ? 'row-reverse'
+              : 'row'
+          "  #item>
+                <span [ngClass]="
+                message.isBot === false
+                ? 'speech-bubble-own'
+                : 'speech-bubble'
+            ">{{ message.message }}</span>
+            </li>
+        </ul>
+    </cdk-virtual-scroll-viewport>
+</div>

@@ -14,12 +14,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ChatComponent } from './chat/chat.component';
+import { MessageViewComponent } from './message-view/message-view.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
-    ChatComponent
+    ChatComponent,
+    MessageViewComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,10 @@ import { ChatComponent } from './chat/chat.component';
     MatIconModule,
     MatListModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule,
+    FormsModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
