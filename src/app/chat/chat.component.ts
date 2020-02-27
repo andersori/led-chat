@@ -16,7 +16,6 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessageLed(): void {
-    console.log(this.msg);
     this.chat.sendMessage(this.msg);
     this.msg = '';
   }

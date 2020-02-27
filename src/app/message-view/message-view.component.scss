@@ -24,6 +24,7 @@
     flex-direction: column;
     flex-grow: 2;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .title {
@@ -58,7 +59,6 @@ li {
     display: flex;
     list-style-type: none;
     padding: 10px 0;
-    //background-color: white;
 }
 
 .speech-bubble {
@@ -73,8 +73,8 @@ li {
     background: #f7f8fa;
     box-shadow: 0 1px 2px 0 #bdccd7;
     opacity: 0.8;
-    font-family: Roboto-Regular;
-    font-size: 13px;
+    //font-family: Roboto-Regular;
+    //font-size: 13px;
     color: #2d313f;
     letter-spacing: 0;
     line-height: 21px;
@@ -103,9 +103,9 @@ li {
     word-wrap: break-word;
 
     border-radius: 0.4em;
-    background: #1b47db;
-    font-family: Roboto-Regular;
-    font-size: 14px;
+    background: #673ab7;
+    //font-family: Roboto-Regular;
+    //font-size: 14px;
     color: #ffffff;
     letter-spacing: 0;
     line-height: 19px;
@@ -119,7 +119,7 @@ li {
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-left-color: #1b47db;
+    border-left-color: #673ab7;
     border-right: 0;
     margin-top: -10px;
     margin-right: -10px;

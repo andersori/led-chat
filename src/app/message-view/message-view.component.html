@@ -1,25 +1,28 @@
 <ng-template #noMessages>
     <div class="no-messages">
-        <span class="title">No new message?</span>
-        <span class="info">Send your first message below.</span>
+        <span class="title">Possui alguma dúvida referente a disciplina?</span>
+        <span class="info">Nos envie sua dúvida.</span>
     </div>
 </ng-template>
 <div class="main">
-    <cdk-virtual-scroll-viewport itemSize="50"
-        *ngIf="chat.messagesLed && chat.messagesLed[0]; else noMessages"
-        #scrollMe
-        class="messages-container" class="viewport">
+    <cdk-virtual-scroll-viewport itemSize="50" *ngIf="chat.messagesLed && chat.messagesLed[0]; else noMessages"
+        #scrollMe class="messages-container" class="viewport">
         <ul>
-            <li *cdkVirtualFor="let message of chat.getMessages(this.viewport)" [style.flex-direction]="
+            <li *cdkVirtualFor="let message of chat.getMessages()" [style.flex-direction]="
             message.isBot === false
               ? 'row-reverse'
               : 'row'
-          "  #item>
-                <span [ngClass]="
+          " #item>
+
+                <span *ngIf="message.type==='text'" [ngClass]="
                 message.isBot === false
                 ? 'speech-bubble-own'
                 : 'speech-bubble'
             ">{{ message.message }}</span>
+                <img *ngIf="message.type==='image'" src="{{message.message}}" [ngClass]="
+                message.isBot === false
+                ? 'speech-bubble-own'
+                : 'speech-bubble'">
             </li>
         </ul>
     </cdk-virtual-scroll-viewport>

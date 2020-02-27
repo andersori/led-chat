@@ -1,8 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === true">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
+    <mat-toolbar *ngIf="!isAuthenticated">      
+      <button mat-raised-button color="accent" (click)="openLoginDialog()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Entrar</span>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list *ngIf="isAuthenticated">
       <a mat-list-item href="#">Link 1</a>
       <a mat-list-item href="#">Link 2</a>
       <a mat-list-item href="#">Link 3</a>
@@ -14,7 +19,20 @@
         *ngIf="(isHandset$) || (isHandset$ | async)">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>led-chat</span>
+      <span class="fill-remaining-space"></span>
+      <button type="button" mat-button>
+        <a [routerLink]="['/']" routerLinkActive="router-link-active">
+          <img src="../../assets/imgs/logo-white.svg" class="img-logo">
+        </a>
+      </button>
+      <span class="fill-remaining-space"></span>
+      <button type="button" mat-icon-button>
+        <span>
+          <a href="https://github.com/andersori/led" target="_blank">
+            <img src="../../assets/imgs/github-circle-white-transparent.svg" class="img-git">
+          </a>
+        </span>
+      </button>
     </mat-toolbar>
     <ng-content>
     </ng-content>

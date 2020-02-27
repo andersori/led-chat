@@ -6,7 +6,7 @@
     <mat-form-field class="full-width">
       <mat-label>Dúvida</mat-label>
       <input #message matInput (keydown.enter)='sendMessageLed()' [(ngModel)]="msg" matInput maxlength="500" placeholder="Ex. Como posso fazer...">
-      <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+      <mat-hint align="start"><strong>Não divulgue informações pessoais</strong> </mat-hint>
       <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
     </mat-form-field>
     <button mat-raised-button color="accent" class="btn-send" (click)='sendMessageLed()'>

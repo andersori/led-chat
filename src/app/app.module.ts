@@ -18,13 +18,16 @@ import { MessageViewComponent } from './message-view/message-view.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { LoginComponent } from './login/login.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
     ChatComponent,
-    MessageViewComponent
+    MessageViewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +43,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatInputModule,
     HttpClientModule,
     FormsModule,
-    ScrollingModule
+    ScrollingModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoginComponent]
 })
 export class AppModule { }

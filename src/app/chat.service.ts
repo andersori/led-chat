@@ -36,11 +36,8 @@ export class ChatService {
 
   public sendMessage(msg: String) {
     this.messagesLed = [...this.messagesLed, { type: 'text', message: msg, isBot: false }];
-    return this.http.post(environment.apiUrl + `/public/message?appUuid=${localStorage.getItem('APP_UUID')}`, msg)
-      .pipe(
-        catchError((err) => of(`Error=${err}`))
-      )
-      .pipe(map((res: Response) => {
+    this.http.post(environment.apiUrl + `/public/message?appUuid=${localStorage.getItem('APP_UUID')}`, msg)
+      .subscribe((res: Response) => {
         var mes: MessageLed[] = [];
         for (let i in res) {
           mes.push({
@@ -49,14 +46,14 @@ export class ChatService {
             isBot: true
           });
         }
-        return mes;
-      })).subscribe((messages: MessageLed[]) => {
-        console.log(messages);
-        this.messagesLed = [...this.messagesLed, ...messages];
-      });
+        this.messagesLed = [...this.messagesLed, ...mes];
+      },
+        error => {
+          console.log("error ao consultar api");
+        });
   }
 
-  public getMessages(){
+  public getMessages() {
     return this.messagesLed;
   }
 }

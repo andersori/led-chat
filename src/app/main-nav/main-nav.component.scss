@@ -8,10 +8,29 @@
 
 .sidenav .mat-toolbar {
   background: inherit;
+  top: 50%;
+  position: relative;
+  text-align: center;
+  display: inline-block;
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.img-git {
+  display: block;
+  margin: auto;
+}
+
+.img-logo {
+  display: block;
+  margin: auto;
+  height: 30px;
 }
