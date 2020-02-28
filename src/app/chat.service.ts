@@ -2,7 +2,7 @@ import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, timeout } from 'rxjs/operators';
 
 export interface MessageLed {
   type: String,
@@ -45,7 +45,10 @@ export class ChatService {
     this.messagesLed = [...this.messagesLed, { type: 'text', message: msg, isBot: false }];
     this.messagesLed = [...this.messagesLed, { type: 'load', message: '', isBot: true }];
     this.http.post(environment.apiUrl + `/public/message?appUuid=${localStorage.getItem('APP_UUID')}`, msg)
-      .subscribe((res: Response) => {
+    .pipe(
+      timeout(12000)
+    )  
+    .subscribe((res: Response) => {
         var mes: MessageLed[] = [];
         for (let i in res) {
           mes.push({
