@@ -10,15 +10,20 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 export class MessageViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
-    this.itemElements.changes.subscribe(_ => {
-      this.onItemElementsChanged()
+    this.itemElements.changes.subscribe(ev => {
+      if(this.qtdMessages != this.chat.messagesLed.length){
+        this.onItemElementsChanged();
+        this.qtdMessages = this.chat.messagesLed.length;
+      }
     });
   }
 
   @ViewChild('scrollMe', { static: false }) viewPort: CdkVirtualScrollViewport;
   @ViewChildren('item') itemElements: QueryList<any>;
 
-  constructor(private chat: ChatService) { }
+  private qtdMessages : Number = 0;
+
+  constructor(public chat: ChatService) { }
 
   ngOnInit() {
 
@@ -29,7 +34,7 @@ export class MessageViewComponent implements OnInit, AfterViewInit {
   }
 
   public scrollToBottom(): void {
-    this.viewPort.scrollToIndex(this.chat.messagesLed.length, 'smooth')
+    this.viewPort.scrollToIndex(this.chat.messagesLed.length, 'smooth');
   }
 
 }

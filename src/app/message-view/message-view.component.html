@@ -5,7 +5,7 @@
     </div>
 </ng-template>
 <div class="main">
-    <cdk-virtual-scroll-viewport itemSize="50" *ngIf="chat.messagesLed && chat.messagesLed[0]; else noMessages"
+    <cdk-virtual-scroll-viewport itemSize="100" *ngIf="chat.messagesLed && chat.messagesLed[0]; else noMessages"
         #scrollMe class="messages-container" class="viewport">
         <ul>
             <li *cdkVirtualFor="let message of chat.getMessages()" [style.flex-direction]="
@@ -15,14 +15,38 @@
           " #item>
 
                 <span *ngIf="message.type==='text'" [ngClass]="
-                message.isBot === false
-                ? 'speech-bubble-own'
-                : 'speech-bubble'
-            ">{{ message.message }}</span>
+                    message.isBot === false
+                    ? 'speech-bubble-own'
+                    : 'speech-bubble'
+                ">
+                    {{ message.message }}
+                </span>
+                
                 <img *ngIf="message.type==='image'" src="{{message.message}}" [ngClass]="
-                message.isBot === false
-                ? 'speech-bubble-own'
-                : 'speech-bubble'">
+                    message.isBot === false
+                    ? 'speech-bubble-own'
+                    : 'speech-bubble'">
+                
+                <span *ngIf="message.type==='warn'" [ngClass]="
+                    message.isBot === false
+                    ? 'speech-bubble-own'
+                    : 'speech-bubble'">
+
+                    <mat-icon class="icon-warn">warning</mat-icon>
+                    <span> Bot temporariamente indisponível.</span>
+                </span>
+
+                <span *ngIf="message.type==='load'" [ngClass]="
+                    message.isBot === false
+                    ? 'speech-bubble-own'
+                    : 'speech-bubble'">
+                    
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                </span>
             </li>
         </ul>
     </cdk-virtual-scroll-viewport>

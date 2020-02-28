@@ -15,7 +15,7 @@ export interface MessageLed {
 })
 export class ChatService {
 
-  public appUuid: String;
+  public appUuid: String = null;
   public messagesLed: MessageLed[] = [];
 
   constructor(private http: HttpClient) {
@@ -28,14 +28,22 @@ export class ChatService {
     this.http.get<String>(environment.apiUrl + "/public/message",
       { responseType: 'text' as 'json' })
       .pipe(
-        catchError((err) => of(`Error=${err}`))
+        catchError((err) => of(`null`))
       ).subscribe((uuid) => {
-        localStorage.setItem("APP_UUID", `${uuid}`);
+        if(uuid !== 'null'){
+          localStorage.setItem("APP_UUID", `${uuid}`);
+        }
       });
   }
 
   public sendMessage(msg: String) {
+    
+    if(this.appUuid === null){
+      this.getAppUuid();
+    }
+
     this.messagesLed = [...this.messagesLed, { type: 'text', message: msg, isBot: false }];
+    this.messagesLed = [...this.messagesLed, { type: 'load', message: '', isBot: true }];
     this.http.post(environment.apiUrl + `/public/message?appUuid=${localStorage.getItem('APP_UUID')}`, msg)
       .subscribe((res: Response) => {
         var mes: MessageLed[] = [];
@@ -46,11 +54,14 @@ export class ChatService {
             isBot: true
           });
         }
+        this.messagesLed.splice(this.messagesLed.length - 1, 1);
         this.messagesLed = [...this.messagesLed, ...mes];
       },
-        error => {
-          console.log("error ao consultar api");
-        });
+      error => {
+        this.messagesLed.splice(this.messagesLed.length - 1, 1);
+        this.messagesLed = [...this.messagesLed, { type: 'warn', message: '', isBot: true }];
+        console.log("error ao consultar api");
+      });
   }
 
   public getMessages() {
