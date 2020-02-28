@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -12,20 +13,24 @@ import { LoginComponent } from '../login/login.component';
 })
 export class MainNavComponent {
 
-  private isAuthenticated: Boolean = false;
+  @Input()
+  isAuthenticated: Boolean;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog) { }
+  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog) {
+
+  }
 
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginComponent);
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  verifyAuth() {
+    this.isAuthenticated = sessionStorage.getItem('token') !== null ? true : false;
   }
 }

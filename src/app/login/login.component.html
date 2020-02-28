@@ -1,1 +1,21 @@
-<p>login works!</p>
+<form class="form">
+    <mat-form-field class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Ex. temp_user" [(ngModel)]="username" name="username">
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Senha</mat-label>
+      <input type="password" matInput placeholder="***********" [(ngModel)]="password" name="password">
+    </mat-form-field>
+
+    <mat-error *ngIf="error">
+        Login Inválido. Verifique seu usuário e senha.
+    </mat-error>
+
+    <br/>
+
+    <button mat-raised-button color="accent" (click)="login()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+  </form>
