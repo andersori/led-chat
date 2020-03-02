@@ -127,14 +127,14 @@ li {
 
 .viewport {
     position: fixed;
-    height: 67%;
+    height: 73%;
     width: 100%;
     max-width: 100%;
 }
 
-@media (max-height: 560px) {
+@media (max-height: 540px) {
     .viewport {
-        max-height: 50%;
+        max-height: 60%;
     }
 }
 
