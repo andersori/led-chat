@@ -46,7 +46,7 @@ export class ChatService {
     this.messagesLed = [...this.messagesLed, { type: 'load', message: '', isBot: true }];
     this.http.post(environment.apiUrl + `/public/message?appUuid=${localStorage.getItem('APP_UUID')}`, msg)
     .pipe(
-      timeout(12000)
+      timeout(18000)
     )  
     .subscribe((res: Response) => {
         var mes: MessageLed[] = [];
@@ -63,7 +63,6 @@ export class ChatService {
       error => {
         this.messagesLed.splice(this.messagesLed.length - 1, 1);
         this.messagesLed = [...this.messagesLed, { type: 'warn', message: '', isBot: true }];
-        console.log("error ao consultar api");
       });
   }
 
