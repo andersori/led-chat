@@ -126,9 +126,22 @@ li {
 }
 
 .viewport {
-    height: 450px;
+    position: fixed;
+    height: 67%;
     width: 100%;
     max-width: 100%;
+}
+
+@media (max-height: 560px) {
+    .viewport {
+        max-height: 50%;
+    }
+}
+
+@media (max-height: 200px) {
+    .viewport {
+        max-height: 25%;
+    }
 }
 
 .icon-warn {

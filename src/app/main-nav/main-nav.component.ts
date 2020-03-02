@@ -16,6 +16,8 @@ export class MainNavComponent {
   @Input()
   isAuthenticated: Boolean;
 
+  close : Boolean = true;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -28,6 +30,7 @@ export class MainNavComponent {
 
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginComponent);
+    this.close = false;
   }
 
   verifyAuth() {
