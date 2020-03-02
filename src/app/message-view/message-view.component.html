@@ -5,7 +5,7 @@
     </div>
 </ng-template>
 <div class="main">
-    <cdk-virtual-scroll-viewport itemSize="50" *ngIf="chat.messagesLed && chat.messagesLed[0]; else noMessages"
+    <cdk-virtual-scroll-viewport itemSize="100" *ngIf="chat.messagesLed && chat.messagesLed[0]; else noMessages"
         #scrollMe class="messages-container" class="viewport">
         <ul>
             <li *cdkVirtualFor="let message of chat.getMessages()" [style.flex-direction]="

@@ -9,10 +9,14 @@ import { ChatService } from '../chat.service';
 export class ChatComponent implements OnInit {
 
   msg: String = '';
+  mobile : Boolean = false;
 
   constructor(private chat: ChatService) { }
 
   ngOnInit() {
+    if (window.screen.width < 940) {
+      this.mobile = true;
+    }
   }
 
   sendMessageLed(): void {
