@@ -15,7 +15,6 @@ export interface MessageLed {
 })
 export class ChatService {
 
-  public appUuid: String = null;
   public messagesLed: MessageLed[] = [];
 
   constructor(private http: HttpClient) {
@@ -38,7 +37,7 @@ export class ChatService {
 
   public sendMessage(msg: String) {
     
-    if(this.appUuid === null){
+    if(localStorage.getItem('APP_UUID') === null){
       this.getAppUuid();
     }
 
